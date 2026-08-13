@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+ output   = "../node_modules/.prisma/client"
+}
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             Int        @id @default(autoincrement())
+  nom            String
+  role           String     @default("caissier")
+  motDePasseHash String
+  movements      Movement[]
+  createdAt      DateTime   @default(now())
+}
+
+model Product {
+  id            Int        @id @default(autoincrement())
+  nom           String
+  codeBarre     String?    @unique
+  stockActuel   Int        @default(0)
+  stockSecurite Int        @default(5)
+  imageUrl      String?
+  movements     Movement[]
+  createdAt     DateTime   @default(now())
+}
+
+model Movement {
+  id        Int      @id @default(autoincrement())
+  type      String
+  quantite  Int
+  dateHeure DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}

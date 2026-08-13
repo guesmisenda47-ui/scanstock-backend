@@ -1,0 +1,32 @@
+### Test register
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "nom": "Senda",
+  "motDePasse": "123456",
+  "role": "admin"
+}
+
+### Test login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "nom": "Senda",
+  "motDePasse": "123456"
+}
+
+### Créer un produit
+POST http://localhost:3000/api/produits
+Content-Type: application/json
+
+{
+  "nom": "Huile d'olive",
+  "codeBarre": "1234567890123",
+  "stockActuel": 50,
+  "stockSecurite": 10
+}
+
+### Lister les produits
+GET http://localhost:3000/api/produits
