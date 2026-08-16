@@ -6,9 +6,9 @@ const { PrismaPg } = require('@prisma/adapter-pg');
 const pg = require('pg');
 
 const router = express.Router();
-console.log('DATABASE_URL:', process.env.DATABASE_URL);
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
