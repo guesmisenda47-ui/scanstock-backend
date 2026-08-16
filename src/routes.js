@@ -7,11 +7,7 @@ const pg = require('pg');
 
 const router = express.Router();
 const pool = new pg.Pool({
-  host: 'localhost',
-  port: 5432,
-  database: 'scanstock',
-  user: 'postgres',
-  password: '0000'
+  connectionString: process.env.DATABASE_URL
 });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
